@@ -10,7 +10,8 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Presentation</title>
+    
+    <title>URL Shortener</title>
     <base href="~/"/>
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/site.css" rel="stylesheet"/>
@@ -29,6 +30,10 @@
     <a class="reload" href="">Reload</a>
     <a class="dismiss">🗙</a>
 </div>
+
+<app>
+    <component render-mode="ServerPrerendered" type="typeof(App)"/>
+</app>
 
 <script src="_framework/blazor.server.js"></script>
 </body>
