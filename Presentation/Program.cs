@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -36,7 +37,13 @@ namespace Presentation
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
+                .ConfigureWebHostDefaults(webBuilder =>
+                 {
+                     webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+                     webBuilder.UseStartup<Startup>();
+                     webBuilder.UseIISIntegration();
+                     // webBuilder.UseUrls("https://localhost:5001");
+                 })
                 .ConfigureAppConfiguration((hostingContext, configuration) =>
                  {
                      var hostEnvironment = hostingContext.HostingEnvironment;
