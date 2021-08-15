@@ -8,7 +8,18 @@
         <PackageReference Include="AutoMapper" Version="10.1.1" />
         <PackageReference Include="FluentValidation" Version="10.3.0" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Handlers\UrlLookup\Queries\GetAll" />
+      <Folder Include="Handlers\UrlLookup\Queries\GetByKey" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+      <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

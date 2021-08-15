@@ -4,6 +4,9 @@ namespace Domain.Models
 {
     public class UrlLookup
     {
+        public string Key { get; set; }
+        public string Url { get; set; }
+
         protected bool Equals(UrlLookup other)
         {
             return Key == other.Key && Url == other.Url;
@@ -21,8 +24,5 @@ namespace Domain.Models
         {
             return HashCode.Combine(Key, Url);
         }
-
-        public string Key { get; set; }
-        public string Url { get; set; }
     }
 }

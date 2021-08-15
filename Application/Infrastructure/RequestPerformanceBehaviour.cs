@@ -36,7 +36,7 @@ namespace Application.Infrastructure
             _timer.Stop();
 
             if (_timer.ElapsedMilliseconds <= 500) return response;
-            
+
             var name = typeof(TRequest).Name;
             _logger.LogWarning("Long-running web request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}", name, _timer.ElapsedMilliseconds, request);
 
