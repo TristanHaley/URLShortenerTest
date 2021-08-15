@@ -16,7 +16,6 @@ namespace Persistence.Infrastructure
         {
             var basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}Presentation", Path.DirectorySeparatorChar);
             return Create(basePath, Environment.GetEnvironmentVariable(asp_net_core_environment));
-            ;
         }
 
         private TDbContext Create(string basePath, string environmentName)
