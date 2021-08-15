@@ -22,12 +22,9 @@ namespace Presentation
             {
                 //var context = scope.ServiceProvider.GetService<IUrlShortenerContext>();
                 
-                
                 logger.LogDebug("Attempting database migration");
 
                 //await concreteCreate.Database.MigrateAsync();
-
-                // Initialise
             }
             catch (Exception ex)
             {
