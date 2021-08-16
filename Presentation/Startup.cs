@@ -1,3 +1,5 @@
+using System;
+using System.Net.Http;
 using System.Reflection;
 using Application.Handlers.UrlLookup.Commands.Create;
 using Application.Infrastructure;
@@ -16,9 +18,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
+using NSwag;
 using Persistence;
 using Presentation.Filters.Filters;
+using UrlShortenerApi;
 
 namespace Presentation
 {
@@ -54,9 +57,23 @@ namespace Presentation
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             
-            // Swagger Middleware configuration
-            app.UseSwagger();
-            app.UseSwaggerUI(options => options.SwaggerEndpoint("v1/swagger.json", "UrlShortener V1"));
+            // NSwag / Swagger Setup
+            const string specificationPath = "/api/specification.json";
+            app.UseOpenApi(settings =>
+            {
+                settings.Path         = specificationPath;
+                settings.DocumentName = "UrlShortener Swagger";
+            });
+            app.UseSwaggerUi3(settings =>
+            {
+                settings.Path         = "/api";
+                settings.DocumentPath = specificationPath;
+            });
+            app.UseReDoc(settings =>
+            {
+                settings.Path         = "/redoc";
+                settings.DocumentPath = specificationPath;
+            });
 
             app.UseRouting();
             app.UseEndpoints(endpoints =>
@@ -79,7 +96,10 @@ namespace Presentation
             // Application Transients
             services.AddTransient<IServerDateTime, ServerDateTime>();
             services.AddTransient<IKeyGeneratorService, KeyGeneratorService>();
-
+            
+            // API Clients
+            services.AddHttpClient<IUrlLookupClient, UrlLookupClient>(client => client.BaseAddress = new Uri(Configuration["BaseUrl"]));
+            
             // Add MediatR
             services.AddMediatR(typeof(CreateUrlLookupCommandHandler).GetTypeInfo().Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
@@ -115,7 +135,22 @@ namespace Presentation
                     .AddFluentValidation(fluentValidate => fluentValidate.RegisterValidatorsFromAssemblyContaining<CreateUrlLookupCommandValidator>());
             
             // Swagger
-            services.AddSwaggerGen(options => options.SwaggerDoc("v1", new OpenApiInfo{Title ="URL Shortener API", Version ="v1"}));
+            services.AddOpenApiDocument(document =>
+            {
+                document.DocumentName = "URL Shortener";
+                document.PostProcess = post =>
+                {
+                    post.Info.Title = "URL Shortener API";
+                    post.Info.Contact = new OpenApiContact
+                    {
+                        Name  = "Tristan Haley",
+                        Email = "TristanHaley071@gmail.com"
+                    };
+                    
+                    post.Info.Version     = "v1";
+                    post.Info.Description = "RESTful API definitions for URL Shortener (2006)";
+                };
+            });
         }
     }
 }
