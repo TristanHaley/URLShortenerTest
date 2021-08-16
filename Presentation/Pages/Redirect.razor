@@ -1,0 +1,12 @@
+﻿@page "/{Key?}"
+@inherits RedirectBase
+
+
+@if (RedirectNotFound)
+{
+    <p>Sorry, there's nothing at this address.</p>
+}
+else
+{
+    <p>Redirecting...</p>
+}
