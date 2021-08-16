@@ -16,7 +16,7 @@ namespace Presentation.Components.UrlListings
         
         protected UrlLookupListViewModel UrlLookupModel { get; set; }
         
-        protected async override Task OnInitializedAsync()
+        protected override async Task OnInitializedAsync()
         {
             UrlLookupModel = new UrlLookupListViewModel
             {
