@@ -26,6 +26,7 @@ namespace Application.Handlers.UrlLookup.Commands.Create
 
         public Task Handle(UrlLookupCreated notification, CancellationToken cancellationToken)
         {
+            // TODO: Expand notification system to alert user / trigger workflow / etc., as solution needs
             _logger.LogInformation("Created \"{@notification}\"", notification);
             return Task.CompletedTask;
         }

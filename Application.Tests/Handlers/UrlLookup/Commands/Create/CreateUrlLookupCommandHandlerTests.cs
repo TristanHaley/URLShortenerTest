@@ -5,29 +5,26 @@ using System.Threading.Tasks;
 using Application.Handlers.UrlLookup.Commands.Create;
 using Application.Services;
 using Application.Tests.Fixtures;
-using Application.Tests.Helpers;
 using AutoMapper;
 using Bogus;
 using FluentAssertions;
 using MediatR;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Persistence;
 using Xunit;
 
-namespace Application.Tests.Handlers.UrlLookup.Commands
+namespace Application.Tests.Handlers.UrlLookup.Commands.Create
 {
     public class CreateUrlLookupCommandHandlerTests : IDisposable
     {
-        private readonly CommandTestFixture  _fixture;
+        private readonly ContextTestFixture  _fixture;
         private          UrlShortenerContext Context => _fixture.Context;
-        private          IMapper             Mapper  => _fixture.Mapper;
         private          Faker               faker = new Faker();
         
         public CreateUrlLookupCommandHandlerTests()
         {
-            _fixture = new CommandTestFixture();
+            _fixture = new ContextTestFixture();
         }
 
         [Fact]

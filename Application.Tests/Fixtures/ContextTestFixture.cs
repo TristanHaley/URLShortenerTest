@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Application.Tests.Fixtures
 {
-    public class CommandTestFixture : IDisposable
+    public class ContextTestFixture : IDisposable
     {
         #region Constructors
 
-        public CommandTestFixture()
+        public ContextTestFixture()
         {
             Context = TestDatabaseContextFactory.Create();
             Mapper  = AutoMapperFactory.Create();

@@ -13,11 +13,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Handlers\UrlLookup\Queries\GetAll" />
-      <Folder Include="Handlers\UrlLookup\Queries\GetByKey" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>

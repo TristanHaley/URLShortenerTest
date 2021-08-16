@@ -63,6 +63,10 @@ namespace Application.Handlers.UrlLookup.Commands.Create
 
         private async Task<string> GetUniqueKeyAsync()
         {
+            // TODO: A more sophisticated retry system than random luck
+            // Consider use of Polly for retry mechanism and using url as seed
+            
+            
             const int maxRetries   = 10000;
             var       currentRetry = 0;
 
