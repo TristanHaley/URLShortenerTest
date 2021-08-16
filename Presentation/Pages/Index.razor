@@ -1,11 +1,33 @@
 @page "/"
+@inherits IndexBase
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
-            <h1>T's URL Shortener</h1>
+            <h2>T's URL Shortener</h2>
             <p>Shortening URLs like it's 2006!</p>
         </div>
 
+        <div class="col-sm-12">
+            <EditForm Model="@CreateModel" OnValidSubmit="@(HandleFormSubmissionAsync)">
+                <h4>Enter a URL to minify:</h4>
+                <DataAnnotationsValidator/>
+                <ValidationSummary/>
+                
+                <InputText id="url" @bind-Value="@CreateModel.Url"/>    
+                
+                <button type="submit">Shortenify!</button>
+            </EditForm>
+        </div>
+        
+        @if (HasShortenedUrlToShow)
+        {
+            <div class="col-sm-12">
+                <h4>Your URL!</h4>
+                <div class="alert-info">
+                    <a href="@ShortenedUrl">@ShortenedUrl</a>
+                </div>
+            </div>
+        }
     </div>
 </div>
