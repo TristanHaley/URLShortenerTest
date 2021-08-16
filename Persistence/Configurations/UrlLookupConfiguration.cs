@@ -11,6 +11,7 @@ namespace Persistence.Configurations
             builder.HasKey(e => e.Key);
 
             builder.Property(e => e.Key)
+                   .HasMaxLength(8)
                    .IsRequired();
 
             builder.Property(e => e.Url)

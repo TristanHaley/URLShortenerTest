@@ -9,7 +9,7 @@ namespace Persistence
         {
             UrlShortenerContext urlShortenerContext = new(options);
             urlShortenerContext.Database.EnsureCreated();
-            
+
             return urlShortenerContext;
         }
     }

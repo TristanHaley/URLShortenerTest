@@ -18,6 +18,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Models.UrlLookup", b =>
                 {
                     b.Property<string>("Key")
+                        .HasMaxLength(8)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
@@ -29,7 +30,7 @@ namespace Persistence.Migrations
                     b.HasIndex("Url")
                         .IsUnique();
 
-                    b.ToTable("UrlLookup");
+                    b.ToTable("UrlLookups");
                 });
 #pragma warning restore 612, 618
         }
