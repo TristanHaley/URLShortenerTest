@@ -1,11 +1,28 @@
-﻿@page "/URL-Listings"
+﻿@inherits UrlListingsViewBase
 
 <div class="row">
     <div class="col-12">
-
+        @if (UrlLookupModel?.Lookups?.Any() == true)
+        {
+            <table style="width:100%">
+            <tr>
+                <th>Key</th>
+                <th>URL</th>
+            </tr>
+                @foreach (var urlLookup in UrlLookupModel.Lookups)
+                {
+                    <tr>
+                        <td>@urlLookup.Key</td>
+                        <td>@urlLookup.Url</td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <div class="alert-warning">
+                <p>No URLs in the database</p>
+            </div>
+        }
     </div>
 </div>
-
-@code {
-
-}
